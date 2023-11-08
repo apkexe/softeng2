@@ -33,8 +33,8 @@ module.exports.loginUser = function loginUser (req, res, next, body) {
     });
 };
 
-module.exports.see statistics = function see statistics (req, res, next, contractID, userID, graphID) {
-  Default.see statistics(contractID, userID, graphID)
+module.exports.see_statistics = function see_statistics (req, res, next, contractID, userID, graphID) {
+  Default.see_statistics(contractID, userID, graphID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -43,8 +43,8 @@ module.exports.see statistics = function see statistics (req, res, next, contrac
     });
 };
 
-module.exports.see the posts by all bots = function see the posts by all bots (req, res, next, contractID, userID, botID) {
-  Default.see the posts by all bots(contractID, userID, botID)
+module.exports.see_the_posts_by_all_bots = function see_the_posts_by_all_bots (req, res, next, contractID, userID, botID) {
+  Default.see_the_posts_by_all_bots(contractID, userID, botID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -63,8 +63,8 @@ module.exports.selectCampaignParameters = function selectCampaignParameters (req
     });
 };
 
-module.exports.user decision = function user decision (req, res, next, body, userID, contractID) {
-  Default.user decision(body, userID, contractID)
+module.exports.user_decision = function user_decision (req, res, next, body, userID, contractID) {
+  Default.user_decision(body, userID, contractID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -73,8 +73,8 @@ module.exports.user decision = function user decision (req, res, next, body, use
     });
 };
 
-module.exports.user sends feedback = function user sends feedback (req, res, next) {
-  Default.user sends feedback()
+module.exports.user_sends_feedback = function user_sends_feedback (req, res, next) {
+  Default.user_sends_feedback()
     .then(function (response) {
       utils.writeJson(res, response);
     })
