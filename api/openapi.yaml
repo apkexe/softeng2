@@ -11,8 +11,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/strikosk/NWO/1.0.0
-  description: SwaggerHub API Auto Mocking
+- url: /
 paths:
   /user:
     post:
@@ -126,7 +125,7 @@ paths:
   /user/{UserID}/contract/{ContractID}:
     put:
       description: fr4
-      operationId: user decision
+      operationId: userDecision
       parameters:
       - name: UserID
         in: path
@@ -172,7 +171,7 @@ paths:
       summary: FR 8 - The user should be able to search and view the actions of the
         bots.
       description: View the posts the Bots have done
-      operationId: get-posts
+      operationId: getPosts
       parameters:
       - name: ContractID
         in: path
@@ -211,7 +210,7 @@ paths:
       summary: FR 8 - The user should be able to search and view the actions of the
         bots.
       description: Edit the filters of the search
-      operationId: filter-by
+      operationId: filterBy
       parameters:
       - name: ContractID
         in: path
@@ -256,7 +255,7 @@ paths:
     get:
       description: |
         Returns all statistical graphs for the specific campaign
-      operationId: See statistics
+      operationId: SeeStatistics
       parameters:
       - name: ContractID
         in: path
@@ -303,7 +302,7 @@ paths:
     get:
       summary: FR9
       description: Returns a bots' profile
-      operationId: See the posts by all bots
+      operationId: SeeThePostsByAllBots
       parameters:
       - name: ContractID
         in: path
@@ -349,7 +348,7 @@ paths:
   /user/feedback:
     post:
       description: User gives feedback
-      operationId: User sends feedback
+      operationId: UserSendsFeedback
       responses:
         "200":
           description: sent feedback
@@ -445,13 +444,13 @@ components:
           type: number
       example:
         color: color
-        size: 1.46581298050294517310021547018550336360931396484375
+        size: 1.4658129805029452
         xData:
-        - 0.80082819046101150206595775671303272247314453125
-        - 0.80082819046101150206595775671303272247314453125
+        - 0.8008281904610115
+        - 0.8008281904610115
         yData:
-        - 6.02745618307040320615897144307382404804229736328125
-        - 6.02745618307040320615897144307382404804229736328125
+        - 6.027456183070403
+        - 6.027456183070403
         labels:
         - labels
         - labels

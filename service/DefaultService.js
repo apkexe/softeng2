@@ -100,7 +100,7 @@ exports.loginUser = function(body) {
  * graphID String ID of a specific graph
  * returns List
  **/
-exports.see_statistics = function(contractID,userID,graphID) {
+exports.seeStatistics = function(contractID,userID,graphID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
@@ -134,7 +134,7 @@ exports.see_statistics = function(contractID,userID,graphID) {
  * botID String ID of the bots
  * returns List
  **/
-exports.see_the_posts_by_all_bots = function(contractID,userID,botID) {
+exports.seeThePostsByAllBots = function(contractID,userID,botID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
@@ -215,7 +215,7 @@ exports.selectCampaignParameters = function(body,userID) {
  * contractID String ID of the contract
  * returns List
  **/
-exports.user_decision = function(body,userID,contractID) {
+exports.userDecision = function(body,userID,contractID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
@@ -241,7 +241,7 @@ exports.user_decision = function(body,userID,contractID) {
  *
  * returns inline_response_200
  **/
-exports.user_sends_feedback = function() {
+exports.userSendsFeedback = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
