@@ -1,0 +1,12 @@
+name: CI/CD
+
+on: push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      name: Checkout repo
+      uses: actions/checkout@v2
+
+      
