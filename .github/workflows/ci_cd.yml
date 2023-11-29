@@ -35,4 +35,10 @@ jobs:
         run: railway up --service 2340877d-069e-4ca2-92de-beafc0cd5286
         env:
           RAILWAY_TOKEN: $ {{ secrets.RAILWAY_TOKEN }}
+    
+
+      -name: Setup node
+        
+
+      
       
