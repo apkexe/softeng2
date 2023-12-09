@@ -536,3 +536,13 @@ components:
       example:
         message: message
         email: email
+    Feedback:
+      type: object
+      properties:
+        message:
+          type: string
+        email: 
+          type: string
+      example:
+        message: message
+        email: mail@mail.com
