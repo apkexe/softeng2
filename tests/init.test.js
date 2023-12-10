@@ -46,14 +46,52 @@ test('POST Contract', async (t) => {
     const { statusCode } = await t.context.got.post("user/0",
     {
         json : {
-        
             select: "string",
             comments: "string",
             platforms: 0,
             intensity: 0
-              
           }
     });
 
     t.is(statusCode, 200);
 });
+test('POST Feedback', async (t) => {
+    const { statusCode } = await t.context.got.post("user/feedback",
+    {
+        json : {
+            message : "aef",
+            email : "qwer"
+          }
+    });
+
+    t.is(statusCode, 200);
+});
+
+test('Put Decision', async (t) => {
+    const { statusCode } = await t.context.got.put("user/0/contract/0",
+    {
+        json : {
+            qewr : false
+          }
+
+    });
+
+    t.is(statusCode, 200);
+});
+
+test('Put Post', async (t) => {
+    const { statusCode } = await t.context.got.put("user/0/contract/0/post",
+    {
+        json : {
+            randomdata : false
+          }
+    });
+
+    t.is(statusCode, 200);
+});
+test('Empty input DELETE endpoint /user/10', async (t) => {
+    const UserId = 10
+    const { statusCode } = await t.context.got.delete(`user/${UserId}`)
+
+    t.is(statusCode, 200);
+  })

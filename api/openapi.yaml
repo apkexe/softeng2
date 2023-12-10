@@ -349,6 +349,12 @@ paths:
     post:
       description: User gives feedback
       operationId: UserSendsFeedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
       responses:
         "200":
           description: sent feedback
@@ -536,3 +542,13 @@ components:
       example:
         message: message
         email: email
+    Feedback:
+      type: object
+      properties:
+        message:
+          type: string
+        email: 
+          type: string
+      example:
+        message: message
+        email: mail@mail.com
