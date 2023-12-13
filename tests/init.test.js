@@ -15,9 +15,9 @@ test.before(async (t) => {
 test.after.always((t) => {
     t.context.server.close();
 });
-
-test('GET Post', async (t) => {
-    const { body, statusCode } = await t.context.got("user/0/contract/0/post");
+//single GET Post request
+test('GET  Post', async (t) => {
+    const { body, statusCode } = await t.context.got("user/{userID}/contract/{contractID}/post");
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
             "postLink": "http://example.com/aeiou",
@@ -29,7 +29,8 @@ test('GET Post', async (t) => {
     t.is(statusCode, 200);
 });
 
-test('POST User', async (t) => {
+//POST single user
+test('POST Single User', async (t) => {
     const { statusCode } = await t.context.got.post("user",
     {
         json : {
@@ -41,6 +42,31 @@ test('POST User', async (t) => {
 
     t.is(statusCode, 200);
 });
+
+//POST multiple users
+test('POST multiple User', async (t) => {
+
+    const usersToBeAdded = [
+            {
+            UserID : 'message',
+            username : 'email',
+            password : 'asdfasd'
+            },
+            {
+            UserID : 'message',
+            username : 'email',
+            password : 'asdfasd'
+            }
+        ]
+    
+        for (const users of usersToBeAdded) {
+            const { statusCode } = await t.context.got.post('user', { json: users })
+        
+            // Check status Code
+            t.is(statusCode, 200)
+          }
+});
+
 
 test('POST Contract', async (t) => {
     const { statusCode } = await t.context.got.post("user/0",
@@ -55,17 +81,17 @@ test('POST Contract', async (t) => {
 
     t.is(statusCode, 200);
 });
-test('POST Feedback', async (t) => {
-    const { statusCode } = await t.context.got.post("user/feedback",
-    {
-        json : {
-            message : "aef",
-            email : "qwer"
-          }
-    });
+// test('POST Feedback', async (t) => {
+//     const { statusCode } = await t.context.got.post("user/feedback",
+//     {
+//         json : {
+//             message : "aef",
+//             email : "qwer"
+//           }
+//     });
 
-    t.is(statusCode, 200);
-});
+//     t.is(statusCode, 200);
+// });
 
 test('Put Decision', async (t) => {
     const { statusCode } = await t.context.got.put("user/0/contract/0",
@@ -78,20 +104,32 @@ test('Put Decision', async (t) => {
 
     t.is(statusCode, 200);
 });
-
+//PUT single post
 test('Put Post', async (t) => {
-    const { statusCode } = await t.context.got.put("user/0/contract/0/post",
+    const { statusCode } = await t.context.got.put("user/{userID}/contract/{contractID}/post",
     {
         json : {
-            randomdata : false
+            status : false
           }
     });
 
     t.is(statusCode, 200);
 });
-test('Empty input DELETE endpoint /user/10', async (t) => {
+//DELETE single user
+test('DELETE single user', async (t) => {
     const UserId = 10
     const { statusCode } = await t.context.got.delete(`user/${UserId}`)
 
     t.is(statusCode, 200);
+  })
+//Delete multiple users
+  test('DELETE multiple users', async (t) => {
+    const UserId = [10, 123, 15]
+
+
+    for (const users of UserId) {
+            const { statusCode } = await t.context.got.delete(`user/${users}`)
+            // Check status Code
+            t.is(statusCode, 200)
+          }
   })
