@@ -278,6 +278,12 @@ exports.userUserIDDELETE = function(userID) {
  **/
 exports.viewContracts = function(userID) {
   return new Promise(function(resolve, reject) {
+
+if (userID === null || userID < 0) {
+    resolve([]);
+    return; // Return early to avoid executing the rest of the function
+   }
+
     var examples = {};
     examples['application/json'] = [ {
   "name" : "NWO Campaign",

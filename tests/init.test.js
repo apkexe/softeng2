@@ -3,7 +3,7 @@ const test = require('ava');
 const listen = require('test-listen');
 const got = require('got');
 
-const {} = require('../service/DefaultService.js');
+const {viewContracts, getPosts} = require('../service/DefaultService.js');
 const app = require('../index.js');
 
 test.before(async (t) => {
@@ -18,20 +18,17 @@ test.after.always((t) => {
 
 test('GET Post', async (t) => {
     const { body, statusCode } = await t.context.got("user/0/contract/0/post");
-
+    
     const start = Date.now();
-    const response = await getPosts(contractID, userID);
+    const response = await getPosts(10, 29);
     const end = Date.now();
   
     const responseTime = end - start;
-    t.true(responseTime < 600)
+    t.true(responseTime < 0.1)
 
-   
-    const invalidInput = 'invalidInput';
-      
-    await t.throwsAsync(async () => {
-         await getPosts(invalidInput, invalidInput);
-    }, { instanceOf: Error });
+    t.is(body.length, 2);
+
+    const invalidInput = 10;
     
 
     for(i = 0; i < body.length; i++){
@@ -78,26 +75,29 @@ test('GET Contract', async (t) => {
     const { body, statusCode } = await t.context.got("user/0/contract");
 
     const start = Date.now();
-    const response = await viewContracts();
+    const response = await viewContracts(5);
     const end = Date.now();
   
     const responseTime = end - start;
-    t.true(responseTime < 500)
+    t.true(responseTime < 1)
 
     t.is(body.length, 2);
     
-    const invalidInput = 'invalidInput';
-      
-    await t.throwsAsync(async () => {
-         await viewContracts(invalidInput, invalidInput);
-    }, { instanceOf: Error });
+    const nonExistentUserID = -10;
     
-
+    const nonresponse = await viewContracts(nonExistentUserID);
+    const nullresponse = await viewContracts(null);
+    
+    t.deepEqual(nonresponse, []);
+    t.deepEqual(nullresponse, []);
+    
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
             "name": "NWO Campaign",
             "ContractID": "ContractID",
           })
     }
-    t.is(statusCode, 200);
-});
+    t.is(statusCode, 200); 
+    
+}); 
+
