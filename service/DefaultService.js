@@ -280,11 +280,11 @@ exports.viewContracts = function(userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "name" : "name",
+  "name" : "NWO Campaign",
   "ContractID" : "ContractID",
   "status" : 0
 }, {
-  "name" : "name",
+  "name" : "NWO Campaign",
   "ContractID" : "ContractID",
   "status" : 0
 } ];

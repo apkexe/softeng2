@@ -18,6 +18,22 @@ test.after.always((t) => {
 
 test('GET Post', async (t) => {
     const { body, statusCode } = await t.context.got("user/0/contract/0/post");
+
+    const start = Date.now();
+    const response = await getPosts(contractID, userID);
+    const end = Date.now();
+  
+    const responseTime = end - start;
+    t.true(responseTime < 600)
+
+   
+    const invalidInput = 'invalidInput';
+      
+    await t.throwsAsync(async () => {
+         await getPosts(invalidInput, invalidInput);
+    }, { instanceOf: Error });
+    
+
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
             "postLink": "http://example.com/aeiou",
@@ -55,5 +71,33 @@ test('POST Contract', async (t) => {
           }
     });
 
+    t.is(statusCode, 200);
+});
+
+test('GET Contract', async (t) => {
+    const { body, statusCode } = await t.context.got("user/0/contract");
+
+    const start = Date.now();
+    const response = await viewContracts();
+    const end = Date.now();
+  
+    const responseTime = end - start;
+    t.true(responseTime < 500)
+
+    t.is(body.length, 2);
+    
+    const invalidInput = 'invalidInput';
+      
+    await t.throwsAsync(async () => {
+         await viewContracts(invalidInput, invalidInput);
+    }, { instanceOf: Error });
+    
+
+    for(i = 0; i < body.length; i++){
+        t.like(body[i], {
+            "name": "NWO Campaign",
+            "ContractID": "ContractID",
+          })
+    }
     t.is(statusCode, 200);
 });
