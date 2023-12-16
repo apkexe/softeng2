@@ -1,0 +1,12 @@
+global:
+    branches_exclude:
+        
+    metrics:
+        
+    violations:
+        exclude: 
+            - Position Literals First In Comparisons
+        
+        config:
+            max_line_length: 20
+
