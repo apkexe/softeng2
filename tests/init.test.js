@@ -29,6 +29,20 @@ test('GET  Post', async (t) => {
     t.is(statusCode, 200);
 });
 
+// //Single get request for BotID
+// test('GET  BotID', async (t) => {
+//     const { body, statusCode } = await t.context.got("user/{UserID}/contract/{ContractID}/post/{BotID}");
+//     for(i = 0; i < body.length; i++){
+//         t.like(body[i], {
+//             "postLink": "http://example.com/aeiou",
+//             "imgPost": "http://example.com/aeiou",
+//             "BotID": "BotID",
+//             "postID": "postID"
+//           })
+//     }
+//     t.is(statusCode, 200);
+// });
+
 //POST single user
 test('POST Single User', async (t) => {
     const { statusCode } = await t.context.got.post("user",
