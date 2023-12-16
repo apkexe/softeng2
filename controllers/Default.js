@@ -63,8 +63,8 @@ module.exports.selectCampaignParameters = function selectCampaignParameters (req
     });
 };
 
-module.exports.userDecision = function userDecision (req, res, next, body, userID, contractID) {
-  Default.userDecision(body, userID, contractID)
+module.exports.sendFeedback = function sendFeedback (req, res, next, body) {
+  Default.sendFeedback(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -73,8 +73,8 @@ module.exports.userDecision = function userDecision (req, res, next, body, userI
     });
 };
 
-module.exports.userSendsFeedback = function userSendsFeedback (req, res, next) {
-  Default.userSendsFeedback()
+module.exports.userDecision = function userDecision (req, res, next, body, userID, contractID) {
+  Default.userDecision(body, userID, contractID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
