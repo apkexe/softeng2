@@ -93,7 +93,7 @@ exports.loginUser = function(body) {
 
 
 /**
- * Returns all statistical graphs for the specific campaign 
+ * Returns all statistical graphs for the specific campaign
  *
  * contractID String ID of the contract
  * userID String ID of the user
@@ -208,6 +208,32 @@ exports.selectCampaignParameters = function(body,userID) {
 
 
 /**
+ * Send feedback
+ * User gives feedback
+ *
+ * body User_feedback_body 
+ * returns List
+ **/
+exports.sendFeedback = function(body) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = [ {
+  "message" : "message",
+  "email" : "mail@mail.com"
+}, {
+  "message" : "message",
+  "email" : "mail@mail.com"
+} ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+
+
+/**
  * fr4
  *
  * body Contract_ContractID_body 
@@ -227,27 +253,6 @@ exports.userDecision = function(body,userID,contractID) {
   "ContractID" : "ContractID",
   "status" : 0
 } ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- * User gives feedback
- *
- * returns inline_response_200
- **/
-exports.userSendsFeedback = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "message" : "message",
-  "email" : "email"
-};
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {

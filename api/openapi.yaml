@@ -11,7 +11,6 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 
-
 paths:
   /user:
     post:
@@ -171,7 +170,7 @@ paths:
       summary: FR 8 - The user should be able to search and view the actions of the
         bots.
       description: View the posts the Bots have done
-      operationId: getPosts
+      operationId: get-posts
       parameters:
       - name: ContractID
         in: path
@@ -210,7 +209,7 @@ paths:
       summary: FR 8 - The user should be able to search and view the actions of the
         bots.
       description: Edit the filters of the search
-      operationId: filterBy
+      operationId: filter-by
       parameters:
       - name: ContractID
         in: path
@@ -253,7 +252,8 @@ paths:
       x-swagger-router-controller: Default
   /user/{UserID}/contract/{ContractID}/graph/{GraphID}:
     get:
-      description: Returns all statistical graphs for the specific campaign
+      description: |
+        Returns all statistical graphs for the specific campaign
       operationId: SeeStatistics
       parameters:
       - name: ContractID
@@ -301,7 +301,7 @@ paths:
     get:
       summary: FR9
       description: Returns a bots' profile
-      operationId: SeeThePostsByAllBots
+      operationId: See the posts by all bots
       parameters:
       - name: ContractID
         in: path
@@ -348,13 +348,7 @@ paths:
     post:
       summary: Send feedback
       description: User gives feedback
-      operationId: UserSendsFeedback
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user_feedback_body'
-        required: true
+      operationId: sendFeedback
       responses:
         "200":
           description: sent feedback

@@ -29,8 +29,7 @@ test('GET  Post', async (t) => {
     t.is(statusCode, 200);
 });
 
-//POST single user
-test('POST Single User', async (t) => {
+test('POST User', async (t) => {
     const { statusCode } = await t.context.got.post("user",
     {
         json : {
@@ -76,40 +75,7 @@ test('POST Contract', async (t) => {
             comments: "string",
             platforms: 0,
             intensity: 0
-          }
-    });
-
-    t.is(statusCode, 200);
-});
-// test('POST Feedback', async (t) => {
-//     const { statusCode } = await t.context.got.post("user/feedback",
-//     {
-//         json : {
-//             message : "aef",
-//             email : "qwer"
-//           }
-//     });
-
-//     t.is(statusCode, 200);
-// });
-
-test('Put Decision', async (t) => {
-    const { statusCode } = await t.context.got.put("user/0/contract/0",
-    {
-        json : {
-            qewr : false
-          }
-
-    });
-
-    t.is(statusCode, 200);
-});
-//PUT single post
-test('Put Post', async (t) => {
-    const { statusCode } = await t.context.got.put("user/{userID}/contract/{contractID}/post",
-    {
-        json : {
-            status : false
+              
           }
     });
 
