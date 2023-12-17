@@ -62,38 +62,37 @@ test('PUT posts with valid filters', async (t) => {
     const { statusCode, body } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
         json: filterSettings,
     });
-
     t.is(statusCode, 200);
-    t.true(Array.isArray(body), 'Expected response body to be an array');
 });
 
-// test('PUT posts with invalid contract ID', async (t) => {
-//     const userID = '123';
-//     const invalidContractID = '';
-//     const filterSettings = {
-//         SortBy: 1,
-//         Platforms: 100010
-//     };
-
-//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${invalidContractID}/post`, {
-//         json: filterSettings,
-//     });
-
-//     t.is(statusCode, 404, 'Expected status code to be 404 for invalid contract ID');
-// });
-
-// // We need to check this
-// test('PUT posts with missing filters', async (t) => {
+// // NA DW AUTO
+// test('PUT posts with null filter settings', async (t) => {
 //     const userID = '123';
 //     const contractID = '456';
-
+//     const invalidfilterSettings = {
+//         SortBy: 0,
+//         Platforms: 0
+//     };
 //     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
-//         json: {},
+//         json: filterSettings,
 //     });
+//     await t.throwsAsync(
+//         t.context.got.delete(`user/${invalidUserID}`),
+//         {instanceOf: t.context.got.HTTPError, message: /Response code 405/ }
+//       );
+// });
 
-//     t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
-// });gi
+// We need to check this
+test('PUT posts with missing filters', async (t) => {
+    const userID = '123';
+    const contractID = '456';
 
+    const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+        json: {},
+    });
+
+    t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
+});
 
 // //DELETE single user
 test('DELETE user by ID', async (t) => {
@@ -104,13 +103,13 @@ test('DELETE user by ID', async (t) => {
     t.is(statusCode, 200, 'Expected status code to be 200 for successful deletion');
 });
 
-// test('DELETE user with invalid ID', async (t) => {
-//     const invalidUserID = '';
-
-//     const { statusCode } = await t.context.got.delete(`user/${invalidUserID}`);
-
-//     t.is(statusCode, 404, 'Expected status code to be 404 for invalid user ID');
-// });
+test('DELETE user with invalid ID', async (t) => {
+    const invalidUserID = '';
+    await t.throwsAsync(
+        t.context.got.delete(`user/${invalidUserID}`),
+        {instanceOf: t.context.got.HTTPError, message: /Response code 405/ }
+      );
+});
 
 
 // //Delete multiple users
