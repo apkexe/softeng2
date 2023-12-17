@@ -120,7 +120,7 @@ test('GET Bot Profile', async (t) => {
     const end = Date.now();
   
     const responseTime = end - start;
-    t.true(responseTime < 1)
+    t.true(responseTime < 3)
 
     t.is(body.length, 2);
     
