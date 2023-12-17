@@ -125,7 +125,7 @@ paths:
   /user/{UserID}/contract/{ContractID}:
     put:
       description: fr4
-      operationId: user decision
+      operationId: userDecision
       parameters:
       - name: UserID
         in: path
