@@ -36,6 +36,7 @@ test('PUT user decision', async (t) => {
     t.is(statusCode, 200);
 });
 
+// Testing user decision for an invalid userID
 test('PUT user decision with invalid user ID', async (t) => {
     const invalidUserID = '';
     const contractID = 'existingContractID';
