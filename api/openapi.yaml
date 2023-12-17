@@ -10,8 +10,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
-servers:
-- url: /
+
+
 paths:
   /user:
     post:
@@ -253,8 +253,7 @@ paths:
       x-swagger-router-controller: Default
   /user/{UserID}/contract/{ContractID}/graph/{GraphID}:
     get:
-      description: |
-        Returns all statistical graphs for the specific campaign
+      description: Returns all statistical graphs for the specific campaign
       operationId: SeeStatistics
       parameters:
       - name: ContractID
@@ -347,13 +346,14 @@ paths:
       x-swagger-router-controller: Default
   /user/feedback:
     post:
+      summary: Send feedback
       description: User gives feedback
       operationId: UserSendsFeedback
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Feedback'
+              $ref: '#/components/schemas/user_feedback_body'
         required: true
       responses:
         "200":
@@ -361,7 +361,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                type: array
+                items:
+                  $ref: '#/components/schemas/feedback'
+                x-content-type: application/json
         "400":
           description: unexpected error
           content:
@@ -450,13 +453,13 @@ components:
           type: number
       example:
         color: color
-        size: 1.4658129805029452
+        size: 1.46581298050294517310021547018550336360931396484375
         xData:
-        - 0.8008281904610115
-        - 0.8008281904610115
+        - 0.80082819046101150206595775671303272247314453125
+        - 0.80082819046101150206595775671303272247314453125
         yData:
-        - 6.027456183070403
-        - 6.027456183070403
+        - 6.02745618307040320615897144307382404804229736328125
+        - 6.02745618307040320615897144307382404804229736328125
         labels:
         - labels
         - labels
@@ -497,6 +500,16 @@ components:
         - Stats
         id: 0
         Name: Name
+    feedback:
+      type: object
+      properties:
+        message:
+          type: string
+        email:
+          type: string
+      example:
+        message: message
+        email: mail@mail.com
     user_body:
       type: object
       properties:
@@ -531,24 +544,10 @@ components:
           type: integer
         Platforms:
           type: integer
-    inline_response_200:
+    user_feedback_body:
       type: object
       properties:
         message:
           type: string
-        email:
+        mail:
           type: string
-          description: Your feedback has been submitted.
-      example:
-        message: message
-        email: email
-    Feedback:
-      type: object
-      properties:
-        message:
-          type: string
-        email: 
-          type: string
-      example:
-        message: message
-        email: mail@mail.com
