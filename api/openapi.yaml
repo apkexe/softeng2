@@ -255,7 +255,7 @@ paths:
     get:
       description: |
         Returns all statistical graphs for the specific campaign
-      operationId: SeeStatistics
+      operationId: seeStatistics
       parameters:
       - name: ContractID
         in: path
@@ -302,7 +302,7 @@ paths:
     get:
       summary: FR9
       description: Returns a bots' profile
-      operationId: SeeThePostsByAllBots
+      operationId: seeThePostsByAllBots
       parameters:
       - name: ContractID
         in: path
