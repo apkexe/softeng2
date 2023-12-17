@@ -75,17 +75,6 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-// Creating some dummy objects that will help later on.
-const dummyContract = {
-    "name" : "name",
-    "ContractID" : "ContractID",
-    "status" : 0
-};
-
-const dummyUser = {
-    "UserId" : 1000
-};
-
 // Testing PUT of userDecision. FR 4
 test("PUTuserDecision", async (t) => {
     const contract = dummyContract
@@ -94,41 +83,52 @@ test("PUTuserDecision", async (t) => {
     )
 });
 
-
-// Testing a correct input
+// Test for PUT /user/{UserID}/contract/{ContractID}
 test("PUT /user/{UserID}/contract/{ContractID}", async (t) => {
-    const contract = dummyContract
-    const status = [0 , 1]
-    const user = 
-    for (const contract of classNames) {
-        const { statusCode } = await t.context.got.put(`admin/class/${className}`, {json: classroom});
-        t.is(statusCode, 200);
-    }
+const userID = "123";
+const contractID = "456";
+const decision = {
+    Decision: true
+};
+
+// Test a successful PUT request
+const { statusCode, body } = await t.context.got.put(`user/${userID}/contract/${contractID}`, {
+    json: decision,
 });
 
-test('userDecision', async (t) => {
-    const { statusCode } = await t.context.got.put("user/0/contract/0",
-    {
-        json : {
-            qewr : false
-          }
+// Test for σending a false decision
+const { statusCode: statusCodeFalse, body: bodyFalse } = await t.context.got.put(`user/${userID}/contract/${contractID}`, {
+    json: { Decision: false },
+});
 
-    });
+t.is(statusCodeFalse, 200, 'Expected status code to be 200 for the second case');
 
-    t.is(statusCode, 200);
+// Test for an invalid user ID
+const { statusCode: statusCodeInvalidUser } = await t.context.got.put(`user/invalidUserID/contract/${contractID}`, {
+    json: decision,
+});
+
+t.is(statusCodeInvalidUser, 404, 'Expected status code to be 404 for invalid user ID');
+
+// Test for an invalid contract ID
+const { statusCode: statusCodeInvalidContract } = await t.context.got.put(`user/${userID}/contract/invalidContractID`, {
+    json: decisionPayload,
+});
+
+t.is(statusCodeInvalidContract, 404, 'Expected status code to be 400 for invalid contract ID');
 });
 
 
 //PUT single post
 test('Put Post', async (t) => {
-    const { statusCode } = await t.context.got.put("user/{userID}/contract/{contractID}/post",
-    {
-        json : {
-            status : false
-          }
-    });
+const { statusCode } = await t.context.got.put("user/{userID}/contract/{contractID}/post",
+{
+    json : {
+        status : false
+        }
+});
 
-    t.is(statusCode, 200);
+t.is(statusCode, 200);
 });
 
 
