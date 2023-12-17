@@ -3,7 +3,7 @@ const test = require('ava');
 const listen = require('test-listen');
 const got = require('got');
 
-const {} = require('../service/DefaultService.js');
+const {getPosts} = require('../service/DefaultService.js');
 const app = require('../index.js');
 
 test.before(async (t) => {
