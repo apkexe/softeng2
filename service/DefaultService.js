@@ -102,6 +102,18 @@ exports.loginUser = function(body) {
  **/
 exports.seeStatistics = function(contractID,userID,graphID) {
   return new Promise(function(resolve, reject) {
+if (userID === null || userID < 0) {
+  resolve([]);
+  return; 
+  } 
+if (graphID === null || graphID < 0) {
+  resolve([]);
+  return; 
+}
+if (contractID === null || contractID < 0) {
+resolve([]);
+return; 
+}
     var examples = {};
     examples['application/json'] = [ {
   "color" : "color",
@@ -136,6 +148,18 @@ exports.seeStatistics = function(contractID,userID,graphID) {
  **/
 exports.seeThePostsByAllBots = function(contractID,userID,botID) {
   return new Promise(function(resolve, reject) {
+if (userID === null || userID < 0) {
+  resolve([]);
+  return; 
+  } 
+if (botID === null || botID < 0) {
+  resolve([]);
+  return; 
+}
+if (contractID === null || contractID < 0) {
+resolve([]);
+return; 
+}
     var examples = {};
     examples['application/json'] = [ {
   "top5" : [ {
@@ -235,6 +259,7 @@ exports.userDecision = function(body,userID,contractID) {
   });
 }
 
+
 /**
  * User gives feedback
  *
@@ -277,13 +302,19 @@ exports.userUserIDDELETE = function(userID) {
  **/
 exports.viewContracts = function(userID) {
   return new Promise(function(resolve, reject) {
+
+if (userID === null || userID < 0) {
+    resolve([]);
+    return; // Return early to avoid executing the rest of the function
+   }
+
     var examples = {};
     examples['application/json'] = [ {
-  "name" : "name",
+  "name" : "NWO Campaign",
   "ContractID" : "ContractID",
   "status" : 0
 }, {
-  "name" : "name",
+  "name" : "NWO Campaign",
   "ContractID" : "ContractID",
   "status" : 0
 } ];
@@ -294,4 +325,3 @@ exports.viewContracts = function(userID) {
     }
   });
 }
-
