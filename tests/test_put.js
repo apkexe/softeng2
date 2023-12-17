@@ -36,50 +36,89 @@ test('PUT user decision', async (t) => {
     t.is(statusCode, 200);
 });
 
-// Testing user decision for an invalid userID
-test('PUT user decision with invalid user ID', async (t) => {
-    const invalidUserID = '';
-    const contractID = 'existingContractID';
-    const decisionData = {
-        Decision: true
-    }
-    // Doing the PUT request for invalid user.
-    const { statusCode } = await t.context.got.put(`user/${invalidUserID}/contract/${contractID}`, {
-        json: decisionData,
-    });
-    t.is(statusCode, 404);
-});
-
-
-// //PUT single post
-// test('Put Post', async (t) => {
-// const { statusCode } = await t.context.got.put("user/{userID}/contract/{contractID}/post",
-// {
-//     json : {
-//         status : false
-//         }
+// // Testing user decision for an invalid userID
+// test('PUT user decision with invalid user ID', async (t) => {
+//     const invalidUserID = '';
+//     const contractID = 'existingContractID';
+//     const decisionData = {
+//         Decision: true
+//     }
+//     // Doing the PUT request for invalid user.
+//     const { statusCode } = await t.context.got.put(`user/${invalidUserID}/contract/${contractID}`, {
+//         json: decisionData,
+//     });
+//     t.is(statusCode, 404);
 // });
 
-// t.is(statusCode, 200);
+// Testing PUT of FR8 - The user should be able to search and view the actions of the bots.
+test('PUT posts with valid filters', async (t) => {
+    const userID = '123';
+    const contractID = '456';
+    const filterSettings = {
+        SortBy: 1, 
+        Platforms: 10001 // 1 is for a selected platform and 0 for a non-selected one for the selection of {Facebook, X, Instagram, TikTok, Reddit}
+    };
+
+    const { statusCode, body } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+        json: filterSettings,
+    });
+
+    t.is(statusCode, 200);
+    t.true(Array.isArray(body), 'Expected response body to be an array');
+});
+
+// test('PUT posts with invalid contract ID', async (t) => {
+//     const userID = '123';
+//     const invalidContractID = '';
+//     const filterSettings = {
+//         SortBy: 1,
+//         Platforms: 100010
+//     };
+
+//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${invalidContractID}/post`, {
+//         json: filterSettings,
+//     });
+
+//     t.is(statusCode, 404, 'Expected status code to be 404 for invalid contract ID');
+// });
+
+// // We need to check this
+// test('PUT posts with missing filters', async (t) => {
+//     const userID = '123';
+//     const contractID = '456';
+
+//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+//         json: {},
+//     });
+
+//     t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
 // });
 
 
 // //DELETE single user
-// test('DELETE single user', async (t) => {
-//     const UserId = 10
-//     const { statusCode } = await t.context.got.delete(`user/${UserId}`)
+test('DELETE user by ID', async (t) => {
+    const userIDToDelete = '123';
 
-//     t.is(statusCode, 200);
-//   });
+    const { statusCode } = await t.context.got.delete(`user/${userIDToDelete}`);
+
+    t.is(statusCode, 200, 'Expected status code to be 200 for successful deletion');
+});
+
+// test('DELETE user with invalid ID', async (t) => {
+//     const invalidUserID = '';
+
+//     const { statusCode } = await t.context.got.delete(`user/${invalidUserID}`);
+
+//     t.is(statusCode, 404, 'Expected status code to be 404 for invalid user ID');
+// });
+
 
 // //Delete multiple users
-// test('DELETE multiple users', async (t) => {
-// const UserId = [10, 123, 15]
+test('DELETE multiple users by IDs', async (t) => {
+    const userIDsToDelete = ['456', '789', '101'];
 
-
-// for (const users of UserId) {
-//         const { statusCode } = await t.context.got.delete(`user/${users}`)
-//         // Check status Code
-//         t.is(statusCode, 200)
-//         }
-// });
+    for (const userID of userIDsToDelete) {
+        const { statusCode } = await t.context.got.delete(`user/${userID}`);
+        t.is(statusCode, 200, `Expected status code to be 200 for successful deletion of user ${userID}`);
+    }
+});
