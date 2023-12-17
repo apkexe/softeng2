@@ -4,9 +4,9 @@
   "description": "Software Engineering Project API",
   "main": "index.js",
   "scripts": {
-	"prestart": "npm install",
-	"start": "node index.js",
-  "test" : "ava"
+    "prestart": "npm install",
+    "start": "node index.js",
+    "test": "ava"
   },
   "keywords": [
     "swagger"

@@ -235,7 +235,6 @@ exports.userDecision = function(body,userID,contractID) {
   });
 }
 
-
 /**
  * User gives feedback
  *
