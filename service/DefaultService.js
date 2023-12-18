@@ -8,22 +8,10 @@
  * body ContractID_post_body 
  * contractID String ID of the contract
  * userID String ID of the user
- * returns List
+ * returns List 
  **/
-exports.filterBy = function(body,contractID,userID) {
+exports.filterBy = function(body,contractID,userID, examples) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "postLink" : "http://example.com/aeiou",
-  "imgPost" : "http://example.com/aeiou",
-  "BotID" : "BotID",
-  "postID" : "postID"
-}, {
-  "postLink" : "http://example.com/aeiou",
-  "imgPost" : "http://example.com/aeiou",
-  "BotID" : "BotID",
-  "postID" : "postID"
-} ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
