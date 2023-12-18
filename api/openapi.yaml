@@ -10,7 +10,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
-
+servers:
+- url: /
 paths:
   /user:
     post:
@@ -254,7 +255,7 @@ paths:
     get:
       description: |
         Returns all statistical graphs for the specific campaign
-      operationId: SeeStatistics
+      operationId: seeStatistics
       parameters:
       - name: ContractID
         in: path
@@ -301,7 +302,7 @@ paths:
     get:
       summary: FR9
       description: Returns a bots' profile
-      operationId: See the posts by all bots
+      operationId: seeThePostsByAllBots
       parameters:
       - name: ContractID
         in: path
@@ -545,3 +546,7 @@ components:
           type: string
         mail:
           type: string
+          description: Your feedback has been submitted.
+      example:
+        message: message
+        email: email

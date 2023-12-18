@@ -73,6 +73,9 @@ module.exports.sendFeedback = function sendFeedback (req, res, next, body) {
     });
 };
 
+module.exports.sendFeedback = function userSendsFeedback (req, res, next) {
+  Default.sendFeedback()
+  
 module.exports.userDecision = function userDecision (req, res, next, body, userID, contractID) {
   Default.userDecision(body, userID, contractID)
     .then(function (response) {
