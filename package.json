@@ -14,13 +14,10 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
+    "ava": "^6.0.1",
     "connect": "^3.2.0",
     "got": "^11.8.3",
     "js-yaml": "^3.3.0",
-    "oas3-tools": "^2.2.3",
-    "test-listen": "^1.1.0"
-  },
-  "devDependencies": {
-    "ava": "^6.0.1"
+    "oas3-tools": "^2.2.3"
   }
 }

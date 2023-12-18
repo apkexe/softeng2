@@ -335,4 +335,3 @@ if (userID === null || userID < 0) {
     }
   });
 }
-
