@@ -43,6 +43,16 @@ exports.filterBy = function(body,contractID,userID) {
  **/
 exports.getPosts = function(contractID,userID) {
   return new Promise(function(resolve, reject) {
+if (userID === null || userID < 0) {
+  resolve([]);
+  return; 
+  } 
+
+if (contractID === null || contractID < 0) {
+resolve([]);
+return; 
+}
+  
     var examples = {};
     examples['application/json'] = [ {
   "postLink" : "http://example.com/aeiou",

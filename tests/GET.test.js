@@ -28,8 +28,17 @@ test('GET Post', async (t) => {
 
     t.is(body.length, 2);
 
-    const invalidInput = 10;
+    const nonExistentUserID = -10;
+    const nonExistentContractID = -10;
+    const nullresponse = await getPosts(null, null);
     
+    const nonresponse = await getPosts(nonExistentUserID,1);
+    const nonresponse2 = await getPosts(1,nonExistentContractID);
+
+    t.deepEqual(nonresponse, []);
+    t.deepEqual(nonresponse2, []);
+    t.deepEqual(nullresponse, []); 
+
 
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
@@ -86,12 +95,12 @@ test('GET Graph', async (t) => {
     t.is(body.length, 2);
     
     const nonExistentUserID = -10;
-    const nonContractID = -10;
-    const nonGraphID = -10;
+    const nonExistentContractID = -10;
+    const nonExistentGraphID = -10;
     
     const nonresponse = await seeStatistics(nonExistentUserID,1,1);
-    const nonresponse2 = await seeStatistics(1,nonContractID,1);
-    const nonresponse3 = await seeStatistics(1,1,nonGraphID);
+    const nonresponse2 = await seeStatistics(1,nonExistentContractID,1);
+    const nonresponse3 = await seeStatistics(1,1,nonExistentGraphID);
     const nullresponse = await seeStatistics(null, null, null);
     
     t.deepEqual(nonresponse, []);
@@ -137,16 +146,26 @@ test('GET Bot Profile', async (t) => {
     t.deepEqual(nonresponse2, []);
     t.deepEqual(nonresponse3, []);
     t.deepEqual(nullresponse, []); 
-    /*
+    
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
-            "color": "color",
-            "size": 1.4658129805029452,
-            "xData": [ 0.8008281904610115, 0.8008281904610115 ],
-            "yData" : [ 6.027456183070403, 6.027456183070403 ],
-            "labels" : [ "labels", "labels" ]
+            "top5": [ {
+                "postLink" : "http://example.com/aeiou",
+                "imgPost" : "http://example.com/aeiou",
+                "BotID" : "BotID",
+                "postID" : "postID"
+              }, {
+                "postLink" : "http://example.com/aeiou",
+                "imgPost" : "http://example.com/aeiou",
+                "BotID" : "BotID",
+                "postID" : "postID"
+              } ],
+            "Profiles": [ "Profiles", "Profiles" ],
+            "Stats": [ "Stats", "Stats" ],
+            "id" : 0,
+            "Name" : "Name"
           })
-    } */
+    } 
     t.is(statusCode, 200); 
     
 }); 
