@@ -113,3 +113,15 @@ test('POST empty contract', async (t) => {
       { instanceOf: t.context.got.HTTPError, message: /Response code 415/ }
     )
   })
+
+test('POST Feedback', async (t) => {
+    const { statusCode } = await t.context.got.post("user/feedback",
+    {
+        json : {
+            message : "aef",
+            email : "qwer"
+          }
+    });
+
+    t.is(statusCode, 200);
+});

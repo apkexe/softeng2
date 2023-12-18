@@ -73,8 +73,8 @@ module.exports.userDecision = function userDecision (req, res, next, body, userI
     });
 };
 
-module.exports.userSendsFeedback = function userSendsFeedback (req, res, next) {
-  Default.userSendsFeedback()
+module.exports.sendFeedback = function userSendsFeedback (req, res, next) {
+  Default.sendFeedback()
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -275,7 +275,7 @@ exports.userDecision = function(body,userID,contractID) {
  *
  * returns inline_response_200
  **/
-exports.userSendsFeedback = function() {
+exports.sendFeedback = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
