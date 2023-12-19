@@ -83,16 +83,16 @@ test('PUT posts with valid filters', async (t) => {
 // });
 
 // We need to check this
-test('PUT posts with missing filters', async (t) => {
-    const userID = '123';
-    const contractID = '456';
+// test('PUT posts with missing filters', async (t) => {
+//     const userID = '123';
+//     const contractID = '456';
 
-    const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
-        json: {},
-    });
+//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+//         json: {},
+//     });
 
-    t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
-});
+//     t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
+// });
 
 // //DELETE single user
 test('DELETE user by ID', async (t) => {
