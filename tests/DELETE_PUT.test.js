@@ -82,51 +82,17 @@ test('PUT posts with valid filters', async (t) => {
 //       );
 // });
 
+// We need to check this
+test('PUT posts with missing filters', async (t) => {
+    const userID = '123';
+    const contractID = '456';
 
-// // We need to check this
-// test('PUT posts with missing filters', async (t) => {
-//     const userID = '123';
-//     const contractID = '456';
+    const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+        json: {},
+    });
 
-//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
-//         json: {},
-//     });
-//     await t.throwsAsync(
-//         t.context.got.put(`user/${userID}`),
-//         {instanceOf: t.context.got.HTTPError, message: /Response code 405/ }
-//       );
-      
-
-//     //t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
-// });
-
-// Initialising examples
-var examples = {};
-examples['application/json'] = [ {
-"postLink" : "http://example.com/aeiou",
-"imgPost" : "http://example.com/aeiou",
-"BotID" : "BotID",
-"postID" : "postID"
-}, {
-"postLink" : "http://example.com/aeiou",
-"imgPost" : "http://example.com/aeiou",
-"BotID" : "BotID",
-"postID" : "postID"
-} ];
-
-var invalidExamples = {};
-invalidExamples['application/json'] = [ {}, {} ];
-
-// // Testing PUT with invalid filters. FR 8
-// test('PUT posts with invalid filters', async (t) => {
-//     const userID = '123';
-//     const contractID = '456';
-//     await t.throwsAsync(
-//         t.context.got.put(`user/${userID}/contract/${contractID}/post`, { json: invalidFilterSettings }),
-//         { instanceOf: t.context.got.HTTPError, message: /Response code 405/ }
-//     );
-// });
-
+    t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
+});
 
 // //DELETE single user
 test('DELETE user by ID', async (t) => {
