@@ -76,10 +76,9 @@ return;
  * body User_body 
  * returns List
  **/
-exports.loginUser = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
+exports.loginUser = function() {
+  return new Promise(function(resolve) {
+    const examples = [{
   "password" : "password",
   "UserID" : "UserID",
   "username" : "username"
@@ -87,12 +86,8 @@ exports.loginUser = function(body) {
   "password" : "password",
   "UserID" : "UserID",
   "username" : "username"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+}];
+resolve(examples);
   });
 }
 
