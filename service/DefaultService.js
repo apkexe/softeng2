@@ -225,9 +225,8 @@ exports.selectCampaignParameters = function(body,userID) {
  * contractID String ID of the contract
  * returns List
  **/
-exports.userDecision = function(body,userID,contractID) {
+exports.userDecision = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
     examples['application/json'] = [ {
   "name" : "name",
   "ContractID" : "ContractID",
@@ -237,11 +236,7 @@ exports.userDecision = function(body,userID,contractID) {
   "ContractID" : "ContractID",
   "status" : 0
 } ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+resolve(examples);
   });
 }
 /**

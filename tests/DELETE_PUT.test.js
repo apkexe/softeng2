@@ -36,20 +36,6 @@ test('PUT user decision', async (t) => {
     t.is(statusCode, 200);
 });
 
-// // Testing user decision for an invalid userID
-// test('PUT user decision with invalid user ID', async (t) => {
-//     const invalidUserID = '';
-//     const contractID = 'existingContractID';
-//     const decisionData = {
-//         Decision: true
-//     }
-//     // Doing the PUT request for invalid user.
-//     const { statusCode } = await t.context.got.put(`user/${invalidUserID}/contract/${contractID}`, {
-//         json: decisionData,
-//     });
-//     t.is(statusCode, 404);
-// });
-
 // Testing PUT of FR8 - The user should be able to search and view the actions of the bots.
 test('PUT posts with valid filters', async (t) => {
     const userID = '123';
@@ -65,34 +51,23 @@ test('PUT posts with valid filters', async (t) => {
     t.is(statusCode, 200);
 });
 
-// // NA DW AUTO
-// test('PUT posts with null filter settings', async (t) => {
-//     const userID = '123';
-//     const contractID = '456';
-//     const invalidfilterSettings = {
-//         SortBy: 0,
-//         Platforms: 0
-//     };
-//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
-//         json: filterSettings,
-//     });
-//     await t.throwsAsync(
-//         t.context.got.delete(`user/${invalidUserID}`),
-//         {instanceOf: t.context.got.HTTPError, message: /Response code 405/ }
-//       );
-// });
-
-// We need to check this
-// test('PUT posts with missing filters', async (t) => {
-//     const userID = '123';
-//     const contractID = '456';
-
-//     const { statusCode } = await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
-//         json: {},
-//     });
-
-//     t.is(statusCode, 404, 'Expected status code to be 404 for missing filters');
-// });
+// Testing PUT of posts with null filter settings
+test('PUT posts with null filter settings', async (t) => {
+    const userID = '123';
+    const contractID = '456';
+    const filterSettings = {
+        SortBy: null,
+        Platforms: null
+    };
+    await t.throwsAsync(
+        async () => {
+            await t.context.got.put(`user/${userID}/contract/${contractID}/post`, {
+                json: filterSettings,
+            });
+        },
+        {instanceOf: t.context.got.HTTPError, message: /Response code 400/ }
+    );
+});
 
 // //DELETE single user
 test('DELETE user by ID', async (t) => {
