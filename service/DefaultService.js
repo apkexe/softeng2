@@ -10,8 +10,8 @@
  * userID String ID of the user
  * returns List 
  **/
-exports.filterBy = function(contractID, userID) {
-  return new Promise(function(resolve, reject) {
+exports.filterBy = function() {
+  return new Promise(function(resolve) {
     const examples = [{
       "postLink" : "http://example.com/aeiou",
       "imgPost" : "http://example.com/aeiou",
@@ -23,12 +23,7 @@ exports.filterBy = function(contractID, userID) {
       "BotID" : "BotID",
       "postID" : "postID"
     } ];
-    
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    resolve(examples);
   });
 }
 
