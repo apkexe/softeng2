@@ -12,7 +12,7 @@
  **/
 exports.filterBy = function(contractID, userID) {
   return new Promise(function(resolve, reject) {
-    examples['application/json'] = [ {
+    const examples = [{
       "postLink" : "http://example.com/aeiou",
       "imgPost" : "http://example.com/aeiou",
       "BotID" : "BotID",
