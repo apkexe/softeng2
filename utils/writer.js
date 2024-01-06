@@ -9,43 +9,31 @@ exports.respondWithCode = function(code, payload) {
   return new ResponsePayload(code, payload);
 }
 
+// Function to determine and return code from arguments
+function getCode(arg1, arg2) {
+  if (arg2 && Number.isInteger(arg2)) {
+    return arg2;
+  } else if (arg1 && Number.isInteger(arg1)) {
+    return arg1;
+  } else {
+    return 200; // Default to 200 if no code is provided
+  }
+}
+
+// Function to determine and return payload from arguments
+function getPayload(arg1) {
+  return arg1 && typeof arg1 === 'object' ? JSON.stringify(arg1, null, 2) : arg1;
+}
+
 // Function to write JSON response to the provided HTTP response object
-var writeJson = exports.writeJson = function(response, arg1, arg2) {
-  var code;
-  var payload;
+exports.writeJson = function(response, arg1, arg2) {
+  var code = getCode(arg1, arg2);
+  var payload = getPayload(arg1);
 
-  // Check if arg1 is a ResponsePayload object, if yes, recursively call writeJson
-  if(arg1 && arg1 instanceof ResponsePayload) {
-    writeJson(response, arg1.payload, arg1.code);
+  // If arg1 is a ResponsePayload object, recursively call writeJson
+  if (arg1 instanceof ResponsePayload) {
+    exports.writeJson(response, arg1.payload, arg1.code);
     return;
-  }
-
-  // Determine code and payload based on arguments
-  if(arg2 && Number.isInteger(arg2)) {
-    code = arg2;
-  }
-  else {
-    if(arg1 && Number.isInteger(arg1)) {
-      code = arg1;
-    }
-  }
-
-  // Assign payload based on arguments
-  if(code && arg1) {
-    payload = arg1;
-  }
-  else if(arg1) {
-    payload = arg1;
-  }
-
-  // Default to 200 if no code is provided
-  if(!code) {
-    code = 200;
-  }
-
-  // Stringify payload if it's an object
-  if(typeof payload === 'object') {
-    payload = JSON.stringify(payload, null, 2);
   }
 
   // Set HTTP headers and send the response
