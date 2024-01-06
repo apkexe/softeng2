@@ -227,7 +227,7 @@ exports.selectCampaignParameters = function(body,userID) {
  **/
 exports.userDecision = function() {
   return new Promise(function(resolve, reject) {
-    examples['application/json'] = [ {
+    const examples = [ {
   "name" : "name",
   "ContractID" : "ContractID",
   "status" : 0
