@@ -10,9 +10,8 @@
  * userID String ID of the user
  * returns List 
  **/
-exports.filterBy = function(body,contractID,userID, examples) {
+exports.filterBy = function(contractID, userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
     examples['application/json'] = [ {
       "postLink" : "http://example.com/aeiou",
       "imgPost" : "http://example.com/aeiou",
