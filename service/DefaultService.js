@@ -1,11 +1,19 @@
 'use strict';
-// FR 8 - The user should be able to search and view the actions of the bots.
+/**
+ * FR 8 - The user should be able to search and view the actions of the bots.
+ * Edit the filters of the search
+ *
+ * body ContractID_post_body 
+ * contractID String ID of the contract
+ * userID String ID of the user
+ * returns List 
+ **/
 exports.filterBy = function() {
   return new Promise(function(resolve) {
     const examples = [{
       "postLink" : "http://example.com/aeiou",
-      "imgPost" : "http://example.com/aeiou", 
-      "BotID" : "BotID", 
+      "imgPost" : "http://example.com/aeiou",
+      "BotID" : "BotID",
       "postID" : "postID"
     }, {
       "postLink" : "http://example.com/aeiou",
@@ -16,13 +24,21 @@ exports.filterBy = function() {
     resolve(examples);
   });
 }
-//FR 8 - The user should be able to search and view the actions of the bots.
+/**
+ * FR 8 - The user should be able to search and view the actions of the bots.
+ * View the posts the Bots have done
+ *
+ * contractID String ID of the contract
+ * userID String ID of the user
+ * returns List
+ **/
 exports.getPosts = function(contractID,userID) {
   return new Promise(function(resolve, reject) {
 if (userID === null || userID < 0) {
   resolve([]);
   return; 
   } 
+
 if (contractID === null || contractID < 0) {
 resolve([]);
 return; 
@@ -47,7 +63,13 @@ return;
     }
   });
 }
-// Log in
+/**
+ * Log in
+ * Logs a user in with their credentials.
+ *
+ * body User_body 
+ * returns List
+ **/
 exports.loginUser = function() {
   return new Promise(function(resolve) {
     const examples = [{
@@ -62,7 +84,14 @@ exports.loginUser = function() {
 resolve(examples);
   });
 }
-// Returns all statistical graphs for the specific campaign 
+/**
+ * Returns all statistical graphs for the specific campaign 
+ *
+ * contractID String ID of the contract
+ * userID String ID of the user
+ * graphID String ID of a specific graph
+ * returns List
+ **/
 exports.seeStatistics = function(contractID,userID,graphID) {
   return new Promise(function(resolve, reject) {
 if (userID === null || userID < 0) {
@@ -98,7 +127,15 @@ return;
     }
   });
 }
-// FR9 Returns a bots' profile
+/**
+ * FR9
+ * Returns a bots' profile
+ *
+ * contractID String ID of the contract
+ * userID String ID of the user
+ * botID String ID of the bots
+ * returns List
+ **/
 exports.seeThePostsByAllBots = function(contractID,userID,botID) {
   return new Promise(function(resolve, reject) {
 if (userID === null || userID < 0) {
@@ -154,7 +191,13 @@ return;
     }
   });
 }
-// FR1/FR2 - The user should be able to select the parameters and the campaign.
+/**
+ * FR1/FR2 - The user should be able to select the parameters and the campaign.
+ *
+ * body User_UserID_body 
+ * userID String ID of the user
+ * returns List
+ **/
 exports.selectCampaignParameters = function(body,userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -174,7 +217,14 @@ exports.selectCampaignParameters = function(body,userID) {
     }
   });
 }
-// FR4
+/**
+ * FR4
+ *
+ * body Contract_ContractID_body 
+ * userID String ID of the user
+ * contractID String ID of the contract
+ * returns List
+ **/
 exports.userDecision = function(body,userID,contractID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -194,7 +244,11 @@ exports.userDecision = function(body,userID,contractID) {
     }
   });
 }
-// User gives feedback
+/**
+ * User gives feedback
+ *
+ * returns inline_response_200
+ **/
 exports.sendFeedback = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -209,15 +263,26 @@ exports.sendFeedback = function() {
     }
   });
 }
-// Delete a user by ID
+/**
+ * Delete a user by ID
+ *
+ * userID Integer ID of the user to be deleted
+ * no response value expected for this operation
+ **/
 exports.userUserIDDELETE = function(userID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
-// FR5
+/**
+ * FR5
+ *
+ * userID String ID of the user
+ * returns List
+ **/
 exports.viewContracts = function(userID) {
   return new Promise(function(resolve, reject) {
+
 if (userID === null || userID < 0) {
     resolve([]);
     return; // Return early to avoid executing the rest of the function
