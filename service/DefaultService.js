@@ -33,14 +33,14 @@ exports.filterBy = function() {
  * returns List
  **/
 exports.getPosts = function(contractID,userID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
 if (userID === null || userID < 0) {
   resolve([]);
   return; 
   } 
 
 if (contractID === null || contractID < 0) {
-resolve([]);
+  resolve([]);
 return; 
 }
   
@@ -93,7 +93,7 @@ resolve(examples);
  * returns List
  **/
 exports.seeStatistics = function(contractID,userID,graphID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
 if (userID === null || userID < 0) {
   resolve([]);
   return; 
@@ -137,7 +137,7 @@ return;
  * returns List
  **/
 exports.seeThePostsByAllBots = function(contractID,userID,botID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
 if (userID === null || userID < 0) {
   resolve([]);
   return; 
@@ -199,7 +199,12 @@ return;
  * returns List
  **/
 exports.selectCampaignParameters = function(body,userID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
+    if (body === null || userID < 0) {
+      resolve([]);
+      return; 
+      } 
+
     var examples = {};
     examples['application/json'] = [ {
   "name" : "name",
@@ -226,7 +231,7 @@ exports.selectCampaignParameters = function(body,userID) {
  * returns List
  **/
 exports.userDecision = function() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     const examples = [ {
   "name" : "name",
   "ContractID" : "ContractID",
@@ -245,7 +250,7 @@ resolve(examples);
  * returns inline_response_200
  **/
 exports.sendFeedback = function() {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     var examples = {};
     examples['application/json'] = {
   "message" : "message",
@@ -265,7 +270,11 @@ exports.sendFeedback = function() {
  * no response value expected for this operation
  **/
 exports.userUserIDDELETE = function(userID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
+    if (userID === null || userID < 0) {
+      resolve([]);
+      return; 
+      } 
     resolve();
   });
 }
@@ -276,7 +285,7 @@ exports.userUserIDDELETE = function(userID) {
  * returns List
  **/
 exports.viewContracts = function(userID) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
 
 if (userID === null || userID < 0) {
     resolve([]);

@@ -3,7 +3,7 @@ const test = require('ava');
 const listen = require('test-listen');
 const got = require('got');
 
-const {getPosts} = require('../service/DefaultService.js');
+const {getPosts,selectCampaignParameters} = require('../service/DefaultService.js');
 const app = require('../index.js');
 //Start running the server before the tests
 test.before(async (t) => {
@@ -63,6 +63,24 @@ test('POST empty user', async (t) => {
       { instanceOf: t.context.got.HTTPError, message: /Response code 415/ }
     )
   })
+
+//Test SelectCampaign function gets called
+test('SelectCampaign TEST', async (t) => {
+  const dummyData = 
+  //Dummy Contract data
+  {
+    name: "string",
+    ContractId: "string",
+    status: 0
+  }
+
+
+  await t.notThrowsAsync(async () => {
+    await selectCampaignParameters(dummyData);
+  });
+});
+
+
 
 //Test for POST Contract endpoint
 test('POST Contract', async (t) => {
