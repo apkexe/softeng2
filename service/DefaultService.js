@@ -55,13 +55,13 @@ return;
   
     var examples = {};
     examples['application/json'] = [ {
-  "postLink" : "http://example.com/aeiou",
-  "imgPost" : "http://example.com/aeiou",
+  "postLink" : "http://example.com/post",
+  "imgPost" : "http://example.com/postimg",
   "BotID" : "BotID",
   "postID" : "postID"
 }, {
-  "postLink" : "http://example.com/aeiou",
-  "imgPost" : "http://example.com/aeiou",
+  "postLink" : "http://example.com/post",
+  "imgPost" : "http://example.com/postimg",
   "BotID" : "BotID",
   "postID" : "postID"
 } ];

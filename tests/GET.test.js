@@ -42,8 +42,8 @@ test('GET Post', async (t) => {
 
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
-            "postLink": "http://example.com/aeiou",
-            "imgPost": "http://example.com/aeiou",
+            "postLink": "http://example.com/post",
+            "imgPost": "http://example.com/postimg",
             "BotID": "BotID",
             "postID": "postID"
           })
