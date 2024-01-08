@@ -107,15 +107,15 @@ test('GET Graph', async (t) => {
     const nonExistentContractID = -10;
     const nonExistentGraphID = -10;
     
-    const nonresponse = await seeStatistics(nonExistentUserID,1,1);
-    const nonresponse2 = await seeStatistics(1,nonExistentContractID,1);
-    const nonresponse3 = await seeStatistics(1,1,nonExistentGraphID);
-    const nullresponse = await seeStatistics(null, null, null);
+    // const nonresponse = await seeStatistics(nonExistentUserID,1,1);
+    // const nonresponse2 = await seeStatistics(1,nonExistentContractID,1);
+    // const nonresponse3 = await seeStatistics(1,1,nonExistentGraphID);
+    // const nullresponse = await seeStatistics(null, null, null);
 // Check if wrong input results to error   
-    t.deepEqual(nonresponse, []);
-    t.deepEqual(nonresponse2, []);
-    t.deepEqual(nonresponse3, []);
-    t.deepEqual(nullresponse, []);  
+    t.deepEqual(await seeStatistics(nonExistentUserID,1,1), []);
+    t.deepEqual(await seeStatistics(1,nonExistentContractID,1), []);
+    t.deepEqual(await seeStatistics(1,1,nonExistentGraphID), []);
+    t.deepEqual(await seeStatistics(null, null, null), []);  
 // Check if the body of the result is the one expected       
     for(i = 0; i < body.length; i++){
         t.like(body[i], {
