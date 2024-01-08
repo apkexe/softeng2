@@ -224,12 +224,12 @@ exports.selectCampaignParameters = function(body,userID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "name" : "name",
-  "ContractID" : "ContractID",
+  "name" : "contractName",
+  "ContractID" : "Contract_ID",
   "status" : 0
 }, {
-  "name" : "name",
-  "ContractID" : "ContractID",
+  "name" : "contractName",
+  "ContractID" : "Contract_ID",
   "status" : 0
 } ];
     if (Object.keys(examples).length > 0) {
