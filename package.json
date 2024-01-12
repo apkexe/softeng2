@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node index.js",
-    "test": "ava"
+    "test": "ava",
+    "coverage": "nyc npm test"
   },
   "keywords": [
     "swagger"
@@ -20,5 +21,8 @@
     "js-yaml": "^3.3.0",
     "oas3-tools": "^2.2.3",
     "test-listen": "^1.1.0"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0"
   }
 }

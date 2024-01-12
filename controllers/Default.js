@@ -3,7 +3,7 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/DefaultService');
 // Used to filter bots
-module.exports.filterBy = function filterBy (req, res, next, body, contractID, userID) {
+module.exports.filterBy = function filterBy (req, res, body, contractID, userID) {
   Default.filterBy(body, contractID, userID)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -23,7 +23,7 @@ module.exports.getPosts = function getPosts (req, res, next, contractID, userID)
     });
 };
 // Used for login User
-module.exports.loginUser = function loginUser (req, res, next, body) {
+module.exports.loginUser = function loginUser (req, res, body) {
   Default.loginUser(body)
     .then(function (response) {
       utils.writeJson(res, response);

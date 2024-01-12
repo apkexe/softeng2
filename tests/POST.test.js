@@ -3,15 +3,15 @@ const test = require('ava');
 const listen = require('test-listen');
 const got = require('got');
 
-const {getPosts} = require('../service/DefaultService.js');
+const {getPosts,selectCampaignParameters} = require('../service/DefaultService.js');
 const app = require('../index.js');
-
+//Start running the server before the tests
 test.before(async (t) => {
     t.context.server = http.createServer(app);
     t.context.prefixUrl = await listen(t.context.server);
     t.context.got = got.extend({ prefixUrl: t.context.prefixUrl, responseType: 'json' });
 });
-
+//Close the server after the tests are done
 test.after.always((t) => {
     t.context.server.close();
 });
@@ -27,12 +27,13 @@ test('POST Single User', async (t) => {
           }
     });
 
-    t.is(statusCode, 200);
+      //Check status code
+      t.is(statusCode, 200);
 });
 
 //POST multiple users
 test('POST multiple User', async (t) => {
-
+    //Dummy data
     const usersToBeAdded = [
             {
             UserID : 'message',
@@ -53,7 +54,7 @@ test('POST multiple User', async (t) => {
             t.is(statusCode, 200)
           }
 });
-
+//Test for empty user
 test('POST empty user', async (t) => {
     await t.throwsAsync(
       async () => {
@@ -63,10 +64,29 @@ test('POST empty user', async (t) => {
     )
   })
 
+//Test SelectCampaign function gets called
+test('SelectCampaign TEST', async (t) => {
+  const dummyData = 
+  //Dummy Contract data
+  {
+    name: "string",
+    ContractId: "string",
+    status: 0
+  }
 
+
+  await t.notThrowsAsync(async () => {
+    await selectCampaignParameters(dummyData);
+  });
+});
+
+
+
+//Test for POST Contract endpoint
 test('POST Contract', async (t) => {
     const { statusCode } = await t.context.got.post("user/{userID}",
     {
+        //Dummy Contract data
         json : {
             select: "string",
             comments: "string",
@@ -74,10 +94,10 @@ test('POST Contract', async (t) => {
             intensity: 0
           }
     });
-
+    //Check status code
     t.is(statusCode, 200);
 });
-
+//Test for Multiple POST Contract requests
 test('POST multiple Contracts', async (t) => {
 
     const contractsToBeAdded = [
@@ -104,7 +124,7 @@ test('POST multiple Contracts', async (t) => {
 });
 
 
-
+//Test for empty Contract input 
 test('POST empty contract', async (t) => {
     await t.throwsAsync(
       async () => {
@@ -113,7 +133,7 @@ test('POST empty contract', async (t) => {
       { instanceOf: t.context.got.HTTPError, message: /Response code 415/ }
     )
   })
-
+//Test for POST Feedback endpoint
 test('POST Feedback', async (t) => {
     const { statusCode } = await t.context.got.post("user/feedback",
     {
@@ -122,6 +142,6 @@ test('POST Feedback', async (t) => {
             email : "qwer"
           }
     });
-
+    //Check status code
     t.is(statusCode, 200);
 });
